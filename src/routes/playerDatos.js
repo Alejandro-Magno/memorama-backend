@@ -1,18 +1,16 @@
-const express = require('express');
-const router= express.Router();
-const TwoPlayersMode = require('../models/twoPlayerModel');
-const SingleMode = require('../models/singleModeModel');
+const express = require("express");
+const router = express.Router();
+const TwoPlayersMode = require("../models/twoPlayerModel");
+const SingleMode = require("../models/singleModeModel");
+const ImagenesUrl = require("../models/imagenesUrl");
 
-router.post('/twoplayers', (req, res) => {
-   const datos = req.body
+router.post("/twoplayers", (req, res) => {
+  const datos = req.body;
   let newRegistro = new TwoPlayersMode(datos);
   console.log(datos);
-  newRegistro.save()
-  res.send('subido')
-   
-   
-  
-})
+  newRegistro.save();
+  res.send("subido");
+});
 
 router.get("/twoplayers", async (req, res) => {
   const datos = await TwoPlayersMode.find();
@@ -20,21 +18,50 @@ router.get("/twoplayers", async (req, res) => {
   res.json(datos);
 });
 
-
 router.post("/singlemode", (req, res) => {
-  const datos = req.body;  
+  const datos = req.body;
   let newRegistro = new SingleMode(datos);
-  console.log(datos);
+
   newRegistro.save();
   res.send("subido");
-});  
+});
 
+router.post("/imagesUrl", (req, res) => {
+  const datos = req.body; 
+  let newImages = new ImagenesUrl(datos);
+
+  newImages
+    .save()
+    .then((e) => console.log(e))
+    
+    .catch((err) => res.status(204).json("Error: " + 'Elemento actualmente cargado'));
+});
+
+router.post("/imagesUrlQuery", (req, res) => {
+  const query = req.body.query;
+
+  new Promise((resolve, reject) => {
+    ImagenesUrl.find({ name: query })
+
+      .then((data) => {
+        res.json(data);
+        resolve();
+      })
+      .catch((err) => {
+        res
+          .status(500)
+          .json("Error: " + "no se encontro la query en la base de datos");
+        reject();
+      });
+  });
+
+
+});
 
 router.get("/singlemode", async (req, res) => {
-  const datos = await SingleMode.find();  
+  const datos = await SingleMode.find();
 
   res.json(datos);
-});  
+});
 
-
-module.exports=  router;
+module.exports = router;
