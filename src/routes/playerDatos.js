@@ -57,7 +57,7 @@ router.post("/imagesUrl", (req, res) => {
 
 router.post("/imagesUrlQuery", (req, res) => {
   const query = req.body.query;
-
+  console.log(query);
   new Promise((resolve, reject) => {
     ImagenesUrl.find({ name: query })
 
@@ -67,13 +67,11 @@ router.post("/imagesUrlQuery", (req, res) => {
       })
       .catch((err) => {
         res
-          .status(500)
+          .status(403)
           .json("Error: " + "no se encontro la query en la base de datos");
         reject();
       });
   });
-
-
 });
 
 router.get("/singlemode", async (req, res) => {
