@@ -23,6 +23,7 @@ router.post("/twoplayers", (req, res) => {
 
 router.get("/twoplayers", async (req, res) => {
   const datos = await TwoPlayersMode.find()
+  .catch(e=>{res.status(404)});
   res.json(datos);
    
 
@@ -60,12 +61,13 @@ router.post("/imagesUrl", (req, res) => {
 
 router.post("/imagesUrlQuery", (req, res) => {
   const query = req.body.query;
- console.log('Query cliente', req.body);
+
   new Promise((resolve, reject) => {
     ImagenesUrl.find({ name: query })
 
       .then((data) => {
         res.json(data);
+        console.log('Urls enviadas')
         resolve();
       })
       .catch((err) => {
