@@ -60,7 +60,7 @@ router.post("/imagesUrl", (req, res) => {
 
 router.post("/imagesUrlQuery", (req, res) => {
   const query = req.body.query;
-  console.log(query);
+ 
   new Promise((resolve, reject) => {
     ImagenesUrl.find({ name: query })
 
