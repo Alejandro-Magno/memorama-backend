@@ -8,8 +8,17 @@ router.post("/twoplayers", (req, res) => {
   const datos = req.body;
   let newRegistro = new TwoPlayersMode(datos);
   console.log(datos);
-  newRegistro.save();
-  res.send("subido");
+  newRegistro.save()
+  .then(()=>{
+
+    res.send("subido");
+  })
+  .catch(err => {
+      res
+        .status(403)
+        .json("Error: " + "Peticion incorrecta");
+    res.send(err);
+  })
 });
 
 router.get("/twoplayers", async (req, res) => {
@@ -22,8 +31,17 @@ router.post("/singlemode", (req, res) => {
   const datos = req.body;
   let newRegistro = new SingleMode(datos);
 
-  newRegistro.save();
-  res.send("subido");
+  newRegistro.save()
+ .then(()=>{
+
+    res.send("subido");
+  })
+  .catch(err => {
+      res
+        .status(403)
+        .json("Error: " + "Peticion incorrecta");
+    res.send(err);
+  })
 });
 
 router.post("/imagesUrl", (req, res) => {
