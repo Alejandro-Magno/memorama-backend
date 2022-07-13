@@ -22,7 +22,17 @@ router.post("/twoplayers", (req, res) => {
 });
 
 router.get("/twoplayers", async (req, res) => {
-  const datos = await TwoPlayersMode.find();
+  const datos = await TwoPlayersMode.find()
+    .then((data) => {
+      res.json(data);
+      
+    })
+    .catch((err) => {
+      res
+        .status(403)
+        .json("Error: " + "no se encontro la query en la base de datos");
+   
+    });
 
   res.json(datos);
 });
@@ -51,6 +61,7 @@ router.post("/imagesUrl", (req, res) => {
   newImages
     .save()
     .then((e) => console.log(e))
+
     
     .catch((err) => res.status(204).json("Error: " + 'Elemento actualmente cargado'));
 });
@@ -75,9 +86,19 @@ router.post("/imagesUrlQuery", (req, res) => {
 });
 
 router.get("/singlemode", async (req, res) => {
-  const datos = await SingleMode.find();
+  const datos = await SingleMode.find()
+    .then((data) => {
+      res.json(data);
+   
+    })
+    .catch((err) => {
+      res
+        .status(403)
+        .json("Error: " + "no se encontro la query en la base de datos");
+     
+    });
 
-  res.json(datos);
+ 
 });
 
 module.exports = router;
