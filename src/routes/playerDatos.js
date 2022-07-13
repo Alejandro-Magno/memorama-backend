@@ -15,7 +15,7 @@ router.post("/twoplayers", (req, res) => {
   })
   .catch(err => {
       res
-        .status(403)
+        .status(204)
         .json("Error: " + "Peticion incorrecta");
     res.send(err);
   })
