@@ -27,12 +27,7 @@ router.get("/twoplayers", async (req, res) => {
       res.json(data);
       
     })
-    .catch((err) => {
-      res
-      
-        .json("Error: " + "no se encontro la query en la base de datos");
-   
-    });
+  
 
   res.json(datos);
 });
@@ -91,12 +86,7 @@ router.get("/singlemode", async (req, res) => {
       res.json(data);
    
     })
-    .catch((err) => {
-      res
-      
-        .json("Error: " + "no se encontro la query en la base de datos");
-     
-    });
+   
 
  
 });
