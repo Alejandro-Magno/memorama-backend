@@ -23,13 +23,10 @@ router.post("/twoplayers", (req, res) => {
 
 router.get("/twoplayers", async (req, res) => {
   const datos = await TwoPlayersMode.find()
-    .then((data) => {
-      res.json(data);
-      
-    })
-  
-
   res.json(datos);
+   
+
+
 });
 
 router.post("/singlemode", (req, res) => {
@@ -82,10 +79,8 @@ router.post("/imagesUrlQuery", (req, res) => {
 
 router.get("/singlemode", async (req, res) => {
   const datos = await SingleMode.find()
-    .then((data) => {
-      res.json(data);
-   
-    })
+ 
+    res.json(datos);
    
 
  

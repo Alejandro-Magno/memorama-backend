@@ -11,12 +11,12 @@ const PlayerDatos = require('./routes/playerDatos');
 //Configs
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 
 
 app.use('/api', PlayerDatos);
 // Connect to MongoDB
-console.log(process.env.MONGO_URI);
+
 mongoose
     .connect(process.env.MONGO_URI)
     .then(() => console.log('MongoDB Connected'))
